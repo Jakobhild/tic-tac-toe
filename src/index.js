@@ -2,23 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Game from './game.js'
 
-class app extends React.Component{
-  render(){
-    return(
-      <div>
-        <h1>Tic Tac Toe</h1>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <>
+      <h1>Tic Tac Toe</h1>
+      <Game />
+    </>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <app />
-  </React.StrictMode>
-);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
