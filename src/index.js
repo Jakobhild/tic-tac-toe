@@ -6,10 +6,10 @@ import Game from './game.js'
 
 function App() {
   return (
-    <>
+    <React.StrictMode>
       <h1>Tic Tac Toe</h1>
       <Game />
-    </>
+    </React.StrictMode>
   );
 }
 
