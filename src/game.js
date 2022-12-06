@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 
 function Game() {
@@ -18,6 +18,13 @@ function Game() {
   const oPoints = useRef(0);
   const xPoints = useRef(0);
 
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 3000);
+  });
 
 
   const selectSquare = (row, column) => {
@@ -80,11 +87,13 @@ function Game() {
     setInGame(true)
   }
 
+  
+
   return (
     <div className="game">
-      {inGame ? <p></p> : <p>Press start game to start</p>}
-      <p>{lastWin}</p>
-      <p>X: {xPoints.current} and O: {oPoints.current}</p>
+      {inGame ? <p></p> : <p className={(count % 3 === 0) ? "start-intructions transparent" : "start-intructions"}>Press start game to start...</p>}
+      <p style={{color: "#a3be8c"}}>{lastWin}</p>
+      <p className="points"><mark>Points:</mark><br />X: {xPoints.current} and O: {oPoints.current}</p>
         <div className="game-bord">
           <table className="game-table">
             <tbody>

@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Game from './game.js'
+import PulseText from 'react-pulse-text';
 
 function App() {
   return (
     <React.StrictMode>
      <div className="site">
-      <h1>Tic Tac Toe</h1>
+     <PulseText text="Tic Tac Toe" duration={6000}>
+        <h1>Tic Tac Toe</h1>
+      </PulseText>
       <Game />
      </div>
     </React.StrictMode>
