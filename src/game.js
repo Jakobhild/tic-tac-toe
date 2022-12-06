@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 
 function Game() {
@@ -14,6 +14,10 @@ function Game() {
   const [inGame, setInGame] = useState(true);
 
   const [lastWin, setLastWin] = useState("");
+
+  const oPoints = useRef(0);
+  const xPoints = useRef(0);
+
 
 
   const selectSquare = (row, column) => {
@@ -45,12 +49,29 @@ function Game() {
       return true
     } else if(squareContent[0][2] === squareContent[1][1] && squareContent[0][2] === squareContent[2][0] && squareContent[0][2] !== ""){
       return true
+    } 
+    var tie = true;
+    for(let row = 0; row < 3; row++){
+      for(let column = 0; column < 3; column++){
+        if (squareContent[row][column] === "") {
+          tie = false;
+        }
+      }
+    }
+    if (tie) {
+      tieFunc();
     }
     return false;
   }
 
+  const tieFunc = () => {
+    setInGame(false)
+    setLastWin("It's a tie!")
+  }
+
   const win = () => {
     setInGame(false)
+    turn === "O" ? oPoints.current++ : xPoints.current++;
     setLastWin("Win for " + turn)
   }
   
@@ -60,19 +81,22 @@ function Game() {
   }
 
   return (
-    <>
+    <div className="game">
       {inGame ? <p></p> : <p>Press start game to start</p>}
       <p>{lastWin}</p>
-      <table>
-        <tbody>
-          {squares.map((squares) => (<tr key={squares.row}>
-           {squares.column.map((column) => <td className="square" key={column} onClick={() => selectSquare(squares.row, column)}>{squareContent[squares.row][column]}</td>)}
-          </tr>))}
-        </tbody>
-      </table>
+      <p>X: {xPoints.current} and O: {oPoints.current}</p>
+        <div className="game-bord">
+          <table className="game-table">
+            <tbody>
+              {squares.map((squares) => (<tr key={squares.row}>
+              {squares.column.map((column) => <td className="game-square" key={column} onClick={() => selectSquare(squares.row, column)}>{squareContent[squares.row][column]}</td>)}
+              </tr>))}
+            </tbody>
+          </table>
+        </div>
       <button onClick={startGame}>{inGame ? "Restart" : "Start game"}</button>
       <p>Current turn: {turn}</p>
-    </>
+    </div>
   );
 }
 

@@ -7,8 +7,10 @@ import Game from './game.js'
 function App() {
   return (
     <React.StrictMode>
+     <div className="site">
       <h1>Tic Tac Toe</h1>
       <Game />
+     </div>
     </React.StrictMode>
   );
 }
