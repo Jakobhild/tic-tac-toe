@@ -6,24 +6,20 @@ function Game() {
   const squares = [{row: 0, column: [0, 1, 2]}, 
                   {row: 1, column: [0, 1, 2]}, 
                   {row: 2, column: [0, 1, 2]}];
-
   const [squareContent, setSquareContent] = useState([["", "", ""], ["", "", ""], ["", "", ""]]);
-
   const [turn, setTurn] = useState("X");
-  
   const [inGame, setInGame] = useState(true);
-
   const [lastWin, setLastWin] = useState("");
 
   const oPoints = useRef(0);
   const xPoints = useRef(0);
 
-  const [count, setCount] = useState(0);
+  const [transparent, setTransparent] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
-      setCount((count) => count + 1);
-    }, 3000);
+      transparent ? setTransparent(false) : setTransparent(true)
+    }, 800);
   });
 
 
@@ -91,7 +87,7 @@ function Game() {
 
   return (
     <div className="game">
-      {inGame ? <p></p> : <p className={(count % 3 === 0) ? "start-intructions transparent" : "start-intructions"}>Press start game to start...</p>}
+      {inGame ? "" : <p className={transparent ? "start-intructions transparent" : "start-intructions"}>Press start game to start...</p>}
       <p style={{color: "#a3be8c"}}>{lastWin}</p>
       <p className="points"><mark>Points:</mark><br />X: {xPoints.current} and O: {oPoints.current}</p>
         <div className="game-bord">
@@ -103,8 +99,12 @@ function Game() {
             </tbody>
           </table>
         </div>
-      <button onClick={startGame}>{inGame ? "Restart" : "Start game"}</button>
-      <p>Current turn: {turn}</p>
+      <div className="buttons">
+        <button onClick={startGame}>{inGame ? "Restart" : "Start game"}</button>
+        <button onClick={() => {oPoints.current=0; xPoints.current=0; startGame()}}>Reset points</button>
+      </div>
+      {inGame ? <p>Current turn: {turn}</p> : ""}
+      
     </div>
   );
 }

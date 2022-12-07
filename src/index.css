@@ -75,6 +75,7 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  max-height: 100vh;
 }
 
 body{
@@ -96,11 +97,18 @@ mark{
   text-align: center;
 }
 
-mark p td body h1 {
+mark p td body h1 button{
   font-family: 'SourceCodePro';
 }
 
 .start-intructions{
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.content{
   -moz-transition: all 0.5s ease-in;
   -o-transition: all 0.5s ease-in;
   -webkit-transition: all 0.5s ease-in;
@@ -108,5 +116,13 @@ mark p td body h1 {
 }
 
 .transparent{
-  color: transparent;
+  opacity: 0;
+}
+
+button {
+  background-color: #2e3440;
+  color: #81a1c1;
+  font-family: 'SourceCodePro';
+  border: none;
+  padding: 10px;
 }
